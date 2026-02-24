@@ -45,18 +45,44 @@ const server = http.createServer(async (req, res) => {
   let body = "";
   req.on("data", (chunk) => (body += chunk));
   req.on("end", async () => {
-    // Re-use the actual function handler
-    const fn = require("../api/chat/index.js");
-    const context = {
-      log: { error: console.error },
-      res: null,
-    };
-    const parsed = (() => { try { return JSON.parse(body); } catch { return {}; } })();
-    await fn(context, { method: "POST", body: parsed });
+    // Directly call the DeepSeek API via the shared httpsPost helper
+    // (re-implement inline to avoid coupling to Azure Functions SDK locally)
+    const https = require("https");
+    function httpsPost(url, headers, bodyObj) {
+      return new Promise((resolve, reject) => {
+        const { hostname, pathname } = new URL(url);
+        const data = JSON.stringify(bodyObj);
+        const req = https.request(
+          { hostname, path: pathname, method: "POST",
+            headers: { ...headers, "Content-Length": Buffer.byteLength(data) } },
+          (r) => { let raw = ""; r.on("data", c => raw += c); r.on("end", () => resolve({ status: r.statusCode, body: raw })); }
+        );
+        req.on("error", reject);
+        req.write(data); req.end();
+      });
+    }
 
-    const { status = 200, headers = {}, body: respBody } = context.res;
-    res.writeHead(status, { "Content-Type": "application/json", ...headers });
-    res.end(typeof respBody === "string" ? respBody : JSON.stringify(respBody));
+    const parsed = (() => { try { return JSON.parse(body); } catch { return {}; } })();
+    const userMessage = parsed?.message?.trim();
+    if (!userMessage) {
+      res.writeHead(400, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ error: "Missing 'message'" }));
+      return;
+    }
+
+    // Inline system prompt (same as deployed function)
+    const SYSTEM_PROMPT = `You are a resume-grounded assistant for Rutao Luo. Answer using ONLY the resume context. Include Evidence section with verbatim snippets. If not in resume: "I don't know based on the resume."`;
+    const apiKey = process.env.DEEPSEEK_API_KEY;
+    const model = process.env.DEEPSEEK_MODEL || "deepseek-chat";
+    const resp = await httpsPost(
+      "https://api.deepseek.com/v1/chat/completions",
+      { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
+      { model, messages: [{ role: "system", content: SYSTEM_PROMPT }, { role: "user", content: userMessage }], temperature: 0.1, max_tokens: 800 }
+    );
+    const data = JSON.parse(resp.body);
+    const reply = data.choices?.[0]?.message?.content ?? "No response.";
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ reply }));
   });
 });
 

@@ -26,8 +26,7 @@ yarn-error.log*
 .env*.local
 .env
 
-# api dependencies
-/api/node_modules
+# api — keep node_modules out of git but deploy via swa CLI
 /api/local.settings.json
 
 # vercel

@@ -1,12 +1,14 @@
 {
   "name": "rutao-portfolio-api",
   "version": "1.0.0",
-  "description": "Azure Functions API for portfolio chatbot",
+  "description": "Azure Functions v4 API for portfolio chatbot",
   "main": "index.js",
   "scripts": {
     "start": "func start"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@azure/functions": "^4.11.2"
+  },
   "engines": {
     "node": ">=20"
   }
