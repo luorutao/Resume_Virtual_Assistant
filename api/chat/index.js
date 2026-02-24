@@ -190,8 +190,7 @@ module.exports = async function (context, req) {
   const model = process.env.DEEPSEEK_MODEL || "deepseek-chat";
 
   try {
-    const { default: fetch } = await import("node-fetch");
-
+    // Node 18+ has fetch built-in — no external dependency needed
     const response = await fetch("https://api.deepseek.com/v1/chat/completions", {
       method: "POST",
       headers: {
