@@ -3,7 +3,8 @@
     "allow": [
       "Bash(which python3:*)",
       "Bash(head:*)",
-      "Bash(export PATH=\"/opt/homebrew/bin:/usr/bin:/bin:$PATH\" && npm run build 2>&1)"
+      "Bash(export PATH=\"/opt/homebrew/bin:/usr/bin:/bin:$PATH\" && npm run build 2>&1)",
+      "Bash(grep:*)"
     ]
   }
 }

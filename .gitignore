@@ -39,3 +39,5 @@ next-env.d.ts
 /infra/*.tfstate.backup
 /infra/.terraform.lock.hcl
 /infra/terraform.tfvars
+
+certificates
