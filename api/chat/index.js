@@ -249,11 +249,17 @@ module.exports = async function (context, req) {
       body: JSON.stringify({ reply }),
     };
   } catch (err) {
-    context.log.error("Chat function error:", err.message);
+    const msg = err && err.message ? err.message : String(err);
+    context.log.error("Chat function error:", msg);
     context.res = {
       status: 502,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ error: "Failed to reach DeepSeek API. Please try again." }),
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+      body: JSON.stringify({ error: "Failed to reach DeepSeek API. Please try again.", detail: msg }),
     };
   }
 };
+
+// Guard: ensure unhandled errors don't silently 500
+process.on("unhandledRejection", (reason) => {
+  console.error("Unhandled rejection:", reason);
+});
