@@ -1,10 +1,39 @@
 /**
  * Azure Function: /api/chat
  * Calls DeepSeek API with resume-grounded system prompt.
+ * Uses Node built-in https module — zero external dependencies.
  * Env vars required:
  *   DEEPSEEK_API_KEY  — your DeepSeek API key
  *   DEEPSEEK_MODEL    — (optional) defaults to "deepseek-chat"
  */
+
+const https = require("https");
+
+/** Promisified HTTPS POST — works on Node 14/16/18/20 */
+function httpsPost(url, headers, body) {
+  return new Promise((resolve, reject) => {
+    const { hostname, pathname, search } = new URL(url);
+    const data = JSON.stringify(body);
+    const req = https.request(
+      {
+        hostname,
+        path: pathname + (search || ""),
+        method: "POST",
+        headers: { ...headers, "Content-Length": Buffer.byteLength(data) },
+      },
+      (res) => {
+        let raw = "";
+        res.on("data", (chunk) => (raw += chunk));
+        res.on("end", () => {
+          resolve({ status: res.statusCode, body: raw });
+        });
+      }
+    );
+    req.on("error", reject);
+    req.write(data);
+    req.end();
+  });
+}
 
 const RESUME_CONTEXT = `
 Name: Rutao Luo
@@ -190,14 +219,10 @@ module.exports = async function (context, req) {
   const model = process.env.DEEPSEEK_MODEL || "deepseek-chat";
 
   try {
-    // Node 18+ has fetch built-in — no external dependency needed
-    const response = await fetch("https://api.deepseek.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
+    const response = await httpsPost(
+      "https://api.deepseek.com/v1/chat/completions",
+      { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
+      {
         model,
         messages: [
           { role: "system", content: SYSTEM_PROMPT },
@@ -205,15 +230,14 @@ module.exports = async function (context, req) {
         ],
         temperature: 0.1,
         max_tokens: 800,
-      }),
-    });
+      }
+    );
 
-    if (!response.ok) {
-      const errText = await response.text();
-      throw new Error(`DeepSeek API error ${response.status}: ${errText}`);
+    if (response.status !== 200) {
+      throw new Error(`DeepSeek API error ${response.status}: ${response.body}`);
     }
 
-    const data = await response.json();
+    const data = JSON.parse(response.body);
     const reply = data.choices?.[0]?.message?.content ?? "No response from model.";
 
     context.res = {
