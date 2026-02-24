@@ -41,7 +41,11 @@ export default function ChatWidget() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/chat", {
+      const apiUrl =
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:7071/api/chat"
+          : "/api/chat";
+      const res = await fetch(apiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: text }),

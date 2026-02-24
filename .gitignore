@@ -28,6 +28,7 @@ yarn-error.log*
 
 # api dependencies
 /api/node_modules
+/api/local.settings.json
 
 # vercel
 .vercel
