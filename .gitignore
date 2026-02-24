@@ -26,6 +26,9 @@ yarn-error.log*
 .env*.local
 .env
 
+# api dependencies
+/api/node_modules
+
 # vercel
 .vercel
 

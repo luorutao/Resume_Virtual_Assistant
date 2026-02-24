@@ -1,0 +1,15 @@
+{
+  "name": "rutao-portfolio-api",
+  "version": "1.0.0",
+  "description": "Azure Functions API for portfolio chatbot",
+  "main": "index.js",
+  "scripts": {
+    "start": "func start"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
