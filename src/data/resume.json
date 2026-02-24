@@ -1,0 +1,317 @@
+{
+  "meta": {
+    "generatedAt": "2026-02-24T00:00:00Z",
+    "source": "resume_sources/Resume_Rutao_Luo.pdf"
+  },
+  "personal": {
+    "name": "Rutao Luo",
+    "title": "AI Expert in Finance",
+    "tagline": "Building intelligent systems at the intersection of AI, finance, and cloud.",
+    "location": "United States",
+    "email": "rutaoluo@gmail.com",
+    "phone": "(507) 250-2213",
+    "linkedin": "https://www.linkedin.com/in/james-rutao-luo-32670867/",
+    "github": "https://github.com/luorutao",
+    "resumePdf": "/Resume_Rutao_Luo.pdf"
+  },
+  "summary": [
+    {
+      "label": "Strategic AI Leadership",
+      "text": "Over 5 years of experience leading transformative AI/ML projects and teams. Expert in driving innovation through data science, with a proven ability to deliver solutions that enhance operational efficiency, customer experience, and personalization across various sectors."
+    },
+    {
+      "label": "Technical & Product Management",
+      "text": "Deep technical expertise in AI/ML including predictive modeling, NLP, LLM, and cloud technologies. Skilled in translating complex business requirements into actionable data-driven strategies."
+    },
+    {
+      "label": "Agile Development & SDLC",
+      "text": "Extensive experience with SDLC and agile project management, leading cross-functional teams to deploy scalable data analytics solutions in fast-paced environments."
+    },
+    {
+      "label": "Stakeholder Engagement",
+      "text": "Exceptional ability to engage with senior business stakeholders, articulating complex ideas with clarity and persuasively influencing strategic direction based on data insights."
+    },
+    {
+      "label": "Distinguished Publishing Record",
+      "text": "Authored numerous impactful journal articles and papers in modeling of bio-systems (HIV disease), earning almost 300 citations, reflecting a significant contribution to the field."
+    },
+    {
+      "label": "Coaching & Mentoring",
+      "text": "Recognized for effectively guiding both data scientists and machine learning engineers, enhancing team skills and professional growth."
+    }
+  ],
+  "experience": [
+    {
+      "id": "domyn-2025",
+      "title": "Financial AI Specialist / Lead",
+      "company": "Domyn",
+      "companyUrl": "",
+      "location": "Remote",
+      "startDate": "August 2025",
+      "endDate": "Present",
+      "current": true,
+      "summary": "Delivering end-to-end vertical AI solutions for highly regulated industries, including foundation models, agentic AI systems, and enterprise-grade AI governance.",
+      "bullets": [
+        "Structured data agent: Designed and implemented an LLM-driven agent that transforms natural-language questions into validated, governed structured-data operations (e.g., SQL), producing reliable, non-hallucinatory answers grounded in enterprise datasets.",
+        "Unstructured data agent: Built a hybrid LLM + Knowledge Graph reasoning system that retrieves, interprets, and reasons over free-form documents and unstructured content using semantic search, embeddings, and contextual understanding."
+      ],
+      "tags": ["LLM", "Agentic AI", "Knowledge Graph", "SQL", "RAG", "AI Governance"]
+    },
+    {
+      "id": "vanguard-principal-2019",
+      "title": "Principal Data Scientist",
+      "company": "Vanguard",
+      "companyUrl": "https://www.vanguard.com",
+      "location": "Malvern, PA",
+      "startDate": "May 2019",
+      "endDate": "August 2025",
+      "current": false,
+      "level": "Equivalent to Senior Manager",
+      "summary": "Steered the strategic roadmap for the data science team, devising innovative AI solutions to enhance Vanguard's business operations across marketing, fraud detection, client experience, and governance.",
+      "bullets": [
+        "Team Leadership: Championed continuous learning, leading LLM training sessions that elevated team technical prowess; mentored data scientists and ML engineers through complex project lifecycles.",
+        "Revenue Generation: Implemented AI-driven strategies generating millions in revenue and achieving a major financial milestone every year.",
+        "Enhanced Personalization: Led hyper-personalization systems serving millions of personal investors using Multi-Armed Bandit (MAB) and reinforcement learning; developed recommender systems improving conversion rates and reducing attrition.",
+        "GenAI Application Leadership: Spearheaded pilot of GenAI applications using LLM, RAG, and RLHF — including Crew Assistance, Voice Bot, and Call Summarization.",
+        "130% PAS Growth: Drove a 130% increase in Personal Advice Service leads through a real-time ML solution.",
+        "Risk Mitigation: Employed LLM technologies and audio signal processing for proactive fraud detection and cognitive decline assessment.",
+        "Blockchain Data Security: Standardized and secured CRSP market index data using blockchain technology to ensure data integrity and auditability.",
+        "Marketing & Sales: Built multiple propensity models to amplify conversion rates in advice, ETFs, and other Vanguard products.",
+        "Client Experience Index (CXI): Innovated the CXI to measure client experiences across all retail divisions using operational data and call transcripts.",
+        "Governance Leadership: Led development of a comprehensive model governance guide and GenAI governance framework ensuring responsible, scalable, and compliant AI deployment."
+      ],
+      "tags": ["LLM", "RAG", "RLHF", "MAB", "Reinforcement Learning", "Fraud Detection", "Blockchain", "Propensity Models", "AI Governance", "Python", "Spark"]
+    },
+    {
+      "id": "vanguard-senior-2016",
+      "title": "Senior Data Scientist",
+      "company": "Vanguard",
+      "companyUrl": "https://www.vanguard.com",
+      "location": "Malvern, PA",
+      "startDate": "October 2016",
+      "endDate": "May 2019",
+      "current": false,
+      "summary": "Spearheaded development of ML and AI models to enable data-driven decision-making for retail investor group marketing.",
+      "bullets": [
+        "Designed ML models for RIG (Retail Investor Group) marketing initiatives, contributing to targeted and effective campaigns.",
+        "Pioneered research in optimization, deep learning, and reinforcement learning to enhance business processes.",
+        "Improved customer experience by providing precise forecasts of queue-level phone call demand and recommending optimal staffing strategies.",
+        "Led Vanguard's analytics team transition from traditional platforms to a cutting-edge big data and unified cloud analytics platform."
+      ],
+      "tags": ["Machine Learning", "Deep Learning", "Reinforcement Learning", "Big Data", "Cloud", "Python", "Spark"]
+    },
+    {
+      "id": "comcast-2014",
+      "title": "Engineer III – Data Analytics",
+      "company": "Comcast",
+      "companyUrl": "https://www.comcast.com",
+      "location": "Philadelphia, PA",
+      "startDate": "September 2014",
+      "endDate": "July 2016",
+      "current": false,
+      "summary": "Led advanced modeling and data analysis for Comcast's next-generation network optimization budget.",
+      "bullets": [
+        "Spearheaded advanced modeling crucial to network forecasting and Comcast's budget plan for next-generation network optimization.",
+        "Designed and implemented budget models tailored for Next-Generation Network Architecture.",
+        "Leveraged machine learning and Big Data technologies to elevate customer experience and service quality.",
+        "Mentored and trained junior engineers in algorithm design and coding, fostering professional development."
+      ],
+      "tags": ["Machine Learning", "Big Data", "Network Optimization", "Python", "R"]
+    },
+    {
+      "id": "ge-2013",
+      "title": "Research Control System Engineer",
+      "company": "GE (General Electric)",
+      "companyUrl": "https://www.ge.com",
+      "location": "Erie, PA",
+      "startDate": "July 2013",
+      "endDate": "August 2014",
+      "current": false,
+      "summary": "Led design and development of GE's Trip Optimizer — an Ecomagination product that autonomously manages locomotive throttle and brake systems to optimize train schedules and minimize fuel consumption.",
+      "bullets": [
+        "Applied mathematical modeling and optimization techniques to generate optimal trip plans, improving operational efficiency.",
+        "Designed and implemented real-time control algorithms for embedded systems in locomotives.",
+        "Contributed to significant fuel cost savings through autonomous throttle and brake optimization."
+      ],
+      "tags": ["Control Systems", "Optimization", "Embedded Systems", "MATLAB", "C++"]
+    },
+    {
+      "id": "udel-research-2007",
+      "title": "Research Assistant",
+      "company": "University of Delaware — Dept. of Electrical & Computer Engineering",
+      "location": "Newark, DE",
+      "startDate": "January 2007",
+      "endDate": "January 2013",
+      "current": false,
+      "summary": "Conducted research in nonlinear control theory with focus on mathematical biology and medicine, particularly HIV treatment optimization.",
+      "bullets": [
+        "Developed mathematical models for disease systems using nonlinear control techniques to identify innovative therapeutic strategies.",
+        "Investigated HAART (Highly Active Antiretroviral Therapy) extension approaches to prevent drug-resistant HIV strains.",
+        "Published as first author in five world-class journals and five refereed conference papers; garnered ~300 citations.",
+        "Research featured in Science Daily and NPR (National Public Radio).",
+        "Utilized MATLAB, C++, R, SAS, and SPSS for research."
+      ],
+      "tags": ["Mathematical Modeling", "Nonlinear Control", "MATLAB", "C++", "R", "SAS", "HIV Research", "Publications"]
+    }
+  ],
+  "skills": [
+    {
+      "category": "AI / Machine Learning",
+      "items": [
+        "Machine Learning",
+        "Deep Learning",
+        "Reinforcement Learning",
+        "LLM (Large Language Models)",
+        "GenAI",
+        "RAG (Retrieval-Augmented Generation)",
+        "RLHF",
+        "NLP",
+        "Recommendation Systems",
+        "Multi-Armed Bandit (MAB)",
+        "Experiment Design",
+        "Bayesian Estimation",
+        "Time Series Analysis",
+        "Propensity Modeling",
+        "Fraud Detection"
+      ]
+    },
+    {
+      "category": "Cloud & Infrastructure",
+      "items": [
+        "AWS",
+        "AWS SageMaker",
+        "Cloud Analytics Platforms",
+        "Blockchain",
+        "Agentic AI Systems",
+        "AI Governance"
+      ]
+    },
+    {
+      "category": "Big Data",
+      "items": [
+        "Apache Spark",
+        "Hadoop",
+        "MapReduce"
+      ]
+    },
+    {
+      "category": "Programming Languages",
+      "items": [
+        "Python",
+        "SQL",
+        "R",
+        "MATLAB",
+        "Scala",
+        "Java",
+        "C",
+        "C++",
+        "C#",
+        "SAS"
+      ]
+    },
+    {
+      "category": "Leadership & Strategy",
+      "items": [
+        "Team Leadership",
+        "Strategic Roadmapping",
+        "Agile / SDLC",
+        "Stakeholder Management",
+        "Mentoring & Coaching",
+        "Product Management",
+        "AI Ethics & Governance"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Master of Science in Electrical Engineering",
+      "school": "University of Delaware",
+      "location": "Newark, DE",
+      "year": "January 2013"
+    },
+    {
+      "degree": "Master of Science in Applied Mathematics",
+      "school": "University of Delaware",
+      "location": "Newark, DE",
+      "year": "May 2012"
+    },
+    {
+      "degree": "Bachelor of Science in Control Engineering",
+      "school": "Beijing University of Chemical Technology",
+      "location": "Beijing, China",
+      "year": "July 2000"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "AWS Machine Learning Specialty Certification",
+      "issuer": "Amazon Web Services",
+      "icon": "aws"
+    },
+    {
+      "name": "SAS Certified Base Programmer for SAS 9",
+      "issuer": "SAS Institute",
+      "icon": "sas"
+    },
+    {
+      "name": "SAS Certified Advanced Programmer for SAS 9",
+      "issuer": "SAS Institute",
+      "icon": "sas"
+    },
+    {
+      "name": "Actuarial Science: Exams P & FM",
+      "issuer": "Society of Actuaries",
+      "icon": "actuarial"
+    }
+  ],
+  "publications": [
+    {
+      "title": "Spatial modeling of HIV cryptic viremia and 2-LTR formation during raltegravir intensification",
+      "authors": "E. Fabian Cardozo, Rutao Luo, Michael J. Piovoso and Ryan Zurakowski",
+      "journal": "Journal of Theoretical Biology",
+      "year": 2014,
+      "url": "http://www.sciencedirect.com/science/article/pii/S0022519313005717"
+    },
+    {
+      "title": "Modelling HIV-1 2-LTR dynamics following raltegravir intensification",
+      "authors": "Rutao Luo, E. Fabian Cardozo, Michael J. Piovoso, Hulin Wu, Maria J. Buzon, Javier Martinez-Picado and Ryan Zurakowski",
+      "journal": "Journal of the Royal Society — Interface",
+      "year": 2013,
+      "url": "http://rsif.royalsocietypublishing.org/content/10/84/20130186.full.pdf+html"
+    },
+    {
+      "title": "Modeling Uncertainty in Single-Copy Assays for HIV",
+      "authors": "Rutao Luo, Michael J. Piovoso and Ryan Zurakowski",
+      "journal": "Journal of Clinical Microbiology",
+      "year": 2012,
+      "url": "http://jcm.asm.org/content/50/10/3381.full"
+    },
+    {
+      "title": "HIV Model Parameter Estimates from Interruption Trial Data Including Drug Efficacy and Reservoir Dynamics",
+      "authors": "Rutao Luo, Michael J. Piovoso, Javier Martinez-Picado and Ryan Zurakowski",
+      "journal": "PLoS ONE",
+      "year": 2012,
+      "url": "http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0040198"
+    },
+    {
+      "title": "Optimal antiviral switching to minimize resistance risk in HIV therapy",
+      "authors": "Rutao Luo, Michael J. Piovoso, Javier Martinez-Picado and Ryan Zurakowski",
+      "journal": "PLoS ONE",
+      "year": 2011,
+      "url": "http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0027047"
+    },
+    {
+      "title": "Controlling the Evolution of Resistance",
+      "authors": "Rutao Luo, LaMont Cannon, Jason Hernandez, Michael J. Piovoso and Ryan Zurakowski",
+      "journal": "Journal of Process Control",
+      "year": 2011,
+      "url": "http://www.sciencedirect.com/science/article/pii/S0959152410002283"
+    }
+  ],
+  "stats": [
+    { "label": "Years in AI/ML", "value": "10+" },
+    { "label": "Citations", "value": "~300" },
+    { "label": "Publications", "value": "12+" },
+    { "label": "Revenue Impact", "value": "$M+" }
+  ]
+}

@@ -1,0 +1,10 @@
+# Copy this file to terraform.tfvars and fill in your values.
+# terraform.tfvars is git-ignored — never commit secrets.
+
+project_name    = "rutao-portfolio"
+environment     = "prod"
+location        = "eastus2"
+github_repo_url = "https://github.com/YOUR_USERNAME/portfolio"
+
+# Optional: set your custom domain
+# site_custom_domain = "rutaoluo.com"
