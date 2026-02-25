@@ -312,6 +312,6 @@
     { "label": "Years in AI/ML", "value": "10+" },
     { "label": "Citations", "value": "~300" },
     { "label": "Publications", "value": "12+" },
-    { "label": "Revenue Impact", "value": "$M+" }
+    { "label": "Annual Revenue Impact", "value": "$M+" }
   ]
 }
