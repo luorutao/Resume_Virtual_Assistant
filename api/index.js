@@ -85,6 +85,13 @@ SELECTED PUBLICATIONS (≈300 total citations):
 - "HIV Model Parameter Estimates from Interruption Trial Data" — PLoS ONE, 2012
 - "Optimal antiviral switching to minimize resistance risk in HIV therapy" — PLoS ONE, 2011
 - "Controlling the Evolution of Resistance" — Journal of Process Control, 2011
+
+BEYOND WORK / PERSONAL INTERESTS:
+- Mentoring: Finds genuine satisfaction in mentoring — taking something complex and making it click for someone else.
+- Family & Hands-on Learning: Outside of meetings and models, enjoys robotics kits and STEM projects with his kids, which he considers as good a test of patience and creativity as any professional challenge.
+- Reading: Stays curious through reading across finance, AI, and how large systems break and recover.
+- Travel: Travels regularly and enjoys exploring new places.
+- Photography: Pursues photography as a hobby; sees it as a way to stay observant — a reminder that the most interesting things are usually hiding in plain sight.
 `.trim();
 
 const SYSTEM_PROMPT = `You are a resume-grounded assistant for Rutao Luo's personal website. Answer visitors' questions ONLY using the resume context below.
