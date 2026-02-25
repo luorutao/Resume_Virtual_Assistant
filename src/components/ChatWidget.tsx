@@ -126,7 +126,7 @@ export default function ChatWidget() {
         ) : (
           <>
             <MessageCircle size={18} aria-hidden="true" />
-            <span className="text-sm font-semibold">Virtual Rutao</span>
+            <span className="text-sm font-semibold">Chat with Virtual Rutao</span>
           </>
         )}
       </button>
