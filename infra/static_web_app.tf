@@ -29,11 +29,26 @@ resource "azurerm_static_web_app" "portfolio" {
   }
 }
 
-# ── Custom Domain (optional) ──────────────────────────────────────────────────
+# ── Custom Domains ────────────────────────────────────────────────────────────
+# Free tier supports 2 custom domains; both get free managed TLS certificates.
 
-resource "azurerm_static_web_app_custom_domain" "portfolio" {
-  count             = var.site_custom_domain != "" ? 1 : 0
+# Apex domain (rutaojames.cv)
+# Validated via DNS TXT record: _dnsauth.rutaojames.cv → validation_token output
+# Routing: add an ALIAS / ANAME / CNAME-flattening record at your DNS provider
+#   pointing rutaojames.cv → <default_host_name output>
+resource "azurerm_static_web_app_custom_domain" "apex" {
+  count             = var.site_apex_domain != "" ? 1 : 0
   static_web_app_id = azurerm_static_web_app.portfolio.id
-  domain_name       = var.site_custom_domain
+  domain_name       = var.site_apex_domain
+  validation_type   = "dns-txt-token"
+}
+
+# www subdomain (www.rutaojames.cv)
+# Validated automatically via CNAME delegation — no separate TXT record needed.
+# Routing: add a CNAME record pointing www.rutaojames.cv → <default_host_name output>
+resource "azurerm_static_web_app_custom_domain" "www" {
+  count             = var.site_www_domain != "" ? 1 : 0
+  static_web_app_id = azurerm_static_web_app.portfolio.id
+  domain_name       = var.site_www_domain
   validation_type   = "cname-delegation"
 }

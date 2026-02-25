@@ -6,5 +6,6 @@ environment     = "prod"
 location        = "eastus2"
 github_repo_url = "https://github.com/YOUR_USERNAME/portfolio"
 
-# Optional: set your custom domain
-# site_custom_domain = "rutaoluo.com"
+# Custom domains (Free tier supports 2)
+site_apex_domain = "rutaojames.cv"
+site_www_domain  = "www.rutaojames.cv"

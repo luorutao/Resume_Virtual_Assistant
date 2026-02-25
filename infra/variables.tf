@@ -16,10 +16,16 @@ variable "project_name" {
   default     = "rutao-portfolio"
 }
 
-variable "site_custom_domain" {
-  description = "Custom domain for the site (e.g. rutaoluo.com). Leave empty for the default *.azurestaticapps.net domain."
+variable "site_apex_domain" {
+  description = "Apex (root) domain, e.g. rutaojames.cv. Leave empty to skip."
   type        = string
-  default     = ""
+  default     = "rutaojames.cv"
+}
+
+variable "site_www_domain" {
+  description = "www subdomain, e.g. www.rutaojames.cv. Leave empty to skip."
+  type        = string
+  default     = "www.rutaojames.cv"
 }
 
 variable "github_repo_url" {
