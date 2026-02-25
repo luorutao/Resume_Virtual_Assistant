@@ -11,6 +11,7 @@
     "predev:api": "cp src/data/resume.json api/resume.json",
     "dev:api": "node scripts/local-api.js",
     "prebuild": "cp src/data/resume.json api/resume.json",
+    "pretest": "cp src/data/resume.json api/resume.json",
     "test": "jest",
     "test:coverage": "jest --coverage"
   },
