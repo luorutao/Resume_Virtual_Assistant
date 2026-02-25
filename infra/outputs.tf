@@ -32,6 +32,7 @@ output "www_domain" {
 output "apex_dns_txt_token" {
   description = "Add this as a TXT record at _dnsauth.rutaojames.cv to verify apex domain ownership"
   value       = length(azurerm_static_web_app_custom_domain.apex) > 0 ? azurerm_static_web_app_custom_domain.apex[0].validation_token : "n/a"
+  sensitive   = true
 }
 
 output "dns_setup_instructions" {
