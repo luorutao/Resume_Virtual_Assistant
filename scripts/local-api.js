@@ -47,6 +47,16 @@ function buildResumeContext(data) {
       lines.push(`${i + 1}. ${job.title} — ${job.company} (${job.startDate} – ${job.endDate})`);
       job.bullets.forEach((b) => lines.push(`   - ${b}`));
     });
+
+    const tenures = {};
+    data.experience.forEach((job) => {
+      if (!tenures[job.company]) tenures[job.company] = { start: job.startDate, end: job.endDate };
+      else tenures[job.company].start = job.startDate;
+    });
+    lines.push("\nCOMPANY TENURE TOTALS (use these when asked how long I worked somewhere):");
+    Object.entries(tenures).forEach(([company, { start, end }]) => {
+      lines.push(`- ${company}: ${start} – ${end}`);
+    });
   }
   if (data.skills?.length) {
     lines.push("\nTECHNICAL SKILLS:");

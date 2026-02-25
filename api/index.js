@@ -47,6 +47,17 @@ function buildResumeContext(data) {
       );
       job.bullets.forEach((b) => lines.push(`   - ${b}`));
     });
+
+    // Pre-computed company tenures to avoid the model miscounting multi-role stints
+    const tenures = {};
+    data.experience.forEach((job) => {
+      if (!tenures[job.company]) tenures[job.company] = { start: job.startDate, end: job.endDate };
+      else tenures[job.company].start = job.startDate; // earlier role has a later index — keep earliest
+    });
+    lines.push("\nCOMPANY TENURE TOTALS (use these when asked how long I worked somewhere):");
+    Object.entries(tenures).forEach(([company, { start, end }]) => {
+      lines.push(`- ${company}: ${start} – ${end}`);
+    });
   }
 
   // Skills
