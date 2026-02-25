@@ -115,13 +115,20 @@ export default function ChatWidget() {
       {/* Floating button */}
       <button
         onClick={() => setOpen((v) => !v)}
-        aria-label={open ? "Close chat" : "Chat with AI about Rutao's resume"}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full
-                   bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl
+        aria-label={open ? "Close chat" : "Chat with Virtual Rutao"}
+        className={`fixed bottom-6 right-6 z-50 bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl
                    flex items-center justify-center transition-all duration-200
-                   focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+                   focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500
+                   ${open ? "w-12 h-12 rounded-full" : "h-12 px-4 rounded-full gap-2"}`}
       >
-        {open ? <X size={22} /> : <MessageCircle size={22} />}
+        {open ? (
+          <X size={20} />
+        ) : (
+          <>
+            <MessageCircle size={18} aria-hidden="true" />
+            <span className="text-sm font-semibold">Virtual Rutao</span>
+          </>
+        )}
       </button>
 
       {/* Chat panel */}
