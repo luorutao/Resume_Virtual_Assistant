@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "generate:resume": "node scripts/generate-resume.js",
+    "predev:api": "cp src/data/resume.json api/resume.json",
     "dev:api": "node scripts/local-api.js",
+    "prebuild": "cp src/data/resume.json api/resume.json",
     "test": "jest",
     "test:coverage": "jest --coverage"
   },

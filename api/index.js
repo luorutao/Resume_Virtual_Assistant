@@ -2,6 +2,10 @@
  * Azure Functions v4 entry point
  * Registers the /api/chat HTTP trigger.
  * Uses Node built-in https — zero external dependencies beyond @azure/functions.
+ *
+ * resume.json is copied into api/ at build time (see deploy.yml and package.json).
+ * This means the chatbot context always stays in sync with the resume data —
+ * no manual updates needed.
  */
 
 "use strict";
@@ -9,90 +13,87 @@
 const { app } = require("@azure/functions");
 const https = require("https");
 
-// ─── resume context ───────────────────────────────────────────────────────────
+// ─── load resume data ─────────────────────────────────────────────────────────
 
-const RESUME_CONTEXT = `
-Name: Rutao Luo
-Title: Financial AI Specialist / Lead at Domyn; ex-Principal Data Scientist at Vanguard
-Email: rutaoluo@gmail.com
-LinkedIn: https://www.linkedin.com/in/james-rutao-luo-32670867/
-GitHub: https://github.com/luorutao
+const resume = require("./resume.json");
 
-SUMMARY:
-- Strategic AI Leadership: Over 5 years leading transformative AI/ML projects and teams.
-- Technical & Product Management: Deep expertise in AI/ML including predictive modeling, NLP, LLM, and cloud technologies.
-- Agile Development & SDLC: Leading cross-functional teams to deploy scalable data analytics solutions.
-- Stakeholder Engagement: Engaging senior stakeholders and influencing strategic direction.
-- Distinguished Publishing Record: ~300 citations across peer-reviewed journals on HIV modeling.
-- Coaching & Mentoring: Guiding data scientists and ML engineers through complex project lifecycles.
+// ─── build context string from resume.json ────────────────────────────────────
 
-EXPERIENCE:
-1. Financial AI Specialist / Lead — Domyn (August 2025 – Present)
-   - End-to-end vertical AI solutions for highly regulated industries: foundation models, agentic AI, enterprise AI governance.
-   - Structured data agent: LLM-driven agent transforming natural-language questions into validated SQL operations.
-   - Unstructured data agent: Hybrid LLM + Knowledge Graph system using semantic search, embeddings, contextual understanding.
+function buildResumeContext(data) {
+  const lines = [];
 
-2. Principal Data Scientist (Equivalent to Senior Manager) — Vanguard (May 2019 – August 2025)
-   - Team Leadership: Led LLM training sessions, mentored data scientists and ML engineers.
-   - Revenue Generation: AI-driven strategies generating millions in revenue annually.
-   - Enhanced Personalization: Hyper-personalization using Multi-Armed Bandit (MAB) and reinforcement learning for millions of investors.
-   - GenAI Applications: Spearheaded LLM, RAG, and RLHF pilots including Crew Assistance, Voice Bot, Call Summarization.
-   - 130% PAS Growth: 130% increase in Personal Advice Service leads via real-time ML solution.
-   - Risk Mitigation: LLM and audio signal processing for fraud detection and cognitive decline assessment.
-   - Blockchain: Standardized and secured CRSP market index data using blockchain.
-   - Governance: Led model governance guide and GenAI governance framework.
+  // Personal
+  const p = data.personal;
+  lines.push(`Name: ${p.name}`);
+  lines.push(`Title: ${p.title}`);
+  if (p.tagline) lines.push(`Tagline: ${p.tagline}`);
+  lines.push(`Email: ${p.email}`);
+  if (p.phone) lines.push(`Phone: ${p.phone}`);
+  if (p.linkedin) lines.push(`LinkedIn: ${p.linkedin}`);
+  if (p.github) lines.push(`GitHub: ${p.github}`);
 
-3. Senior Data Scientist — Vanguard (October 2016 – May 2019)
-   - ML models for RIG (Retail Investor Group) marketing initiatives.
-   - Research in optimization, deep learning, reinforcement learning.
-   - Led analytics transition to cloud-based big data platform.
+  // Summary
+  if (data.summary?.length) {
+    lines.push("\nSUMMARY:");
+    data.summary.forEach((s) => lines.push(`- ${s.label}: ${s.text}`));
+  }
 
-4. Engineer III – Data Analytics — Comcast (September 2014 – July 2016)
-   - Advanced modeling for next-generation network optimization budget.
-   - Machine learning and Big Data to improve customer experience.
-   - Mentored junior engineers.
+  // Experience
+  if (data.experience?.length) {
+    lines.push("\nEXPERIENCE:");
+    data.experience.forEach((job, i) => {
+      lines.push(
+        `${i + 1}. ${job.title} — ${job.company} (${job.startDate} – ${job.endDate})`
+      );
+      job.bullets.forEach((b) => lines.push(`   - ${b}`));
+    });
+  }
 
-5. Research Control System Engineer — GE (July 2013 – August 2014)
-   - Led design of GE Trip Optimizer for autonomous locomotive throttle/brake optimization.
-   - Mathematical modeling for optimal train trip plans and fuel minimization.
+  // Skills
+  if (data.skills?.length) {
+    lines.push("\nTECHNICAL SKILLS:");
+    data.skills.forEach((g) =>
+      lines.push(`- ${g.category}: ${g.items.join(", ")}`)
+    );
+  }
 
-6. Research Assistant — University of Delaware (January 2007 – January 2013)
-   - Nonlinear control theory applied to HIV treatment optimization.
-   - First author in 5 world-class journals, 5 conference papers; ~300 citations.
-   - Featured in Science Daily and NPR.
+  // Education
+  if (data.education?.length) {
+    lines.push("\nEDUCATION:");
+    data.education.forEach((e) =>
+      lines.push(`- ${e.degree} — ${e.school} (${e.year})`)
+    );
+  }
 
-TECHNICAL SKILLS:
-- AI/ML: Machine Learning, Deep Learning, Reinforcement Learning, LLM, GenAI, RAG, RLHF, NLP, Recommendation Systems, MAB, Experiment Design, Bayesian Estimation, Time Series Analysis
-- Cloud: AWS (Machine Learning Specialty Certified), Blockchain, Agentic AI Systems, AI Governance
-- Big Data: Apache Spark, Hadoop, MapReduce
-- Programming: Python, SQL, R, MATLAB, Scala, Java, C, C++, C#, SAS
+  // Certifications
+  if (data.certifications?.length) {
+    lines.push("\nCERTIFICATIONS:");
+    data.certifications.forEach((c) => lines.push(`- ${c.name}`));
+  }
 
-EDUCATION:
-- MS Electrical Engineering — University of Delaware (January 2013)
-- MS Applied Mathematics — University of Delaware (May 2012)
-- BS Control Engineering — Beijing University of Chemical Technology (July 2000)
+  // Publications
+  if (data.publications?.length) {
+    lines.push("\nSELECTED PUBLICATIONS:");
+    data.publications.forEach((pub) => {
+      let line = `- "${pub.title}"`;
+      if (pub.journal) line += ` — ${pub.journal}`;
+      if (pub.year) line += `, ${pub.year}`;
+      lines.push(line);
+    });
+  }
 
-CERTIFICATIONS:
-- AWS Machine Learning Specialty Certification
-- SAS Certified Base Programmer for SAS 9
-- SAS Certified Advanced Programmer for SAS 9
-- Actuarial Science: Pass of Exams P & FM
+  // Beyond Work
+  if (data.beyondWork?.paragraphs?.length) {
+    lines.push("\nBEYOND WORK / PERSONAL INTERESTS:");
+    data.beyondWork.paragraphs.forEach((para) => lines.push(`- ${para}`));
+  }
 
-SELECTED PUBLICATIONS (≈300 total citations):
-- "Spatial modeling of HIV cryptic viremia and 2-LTR formation" — Journal of Theoretical Biology, 2014
-- "Modelling HIV-1 2-LTR dynamics following raltegravir intensification" — Journal of the Royal Society Interface, 2013
-- "Modeling Uncertainty in Single-Copy Assays for HIV" — Journal of Clinical Microbiology, 2012
-- "HIV Model Parameter Estimates from Interruption Trial Data" — PLoS ONE, 2012
-- "Optimal antiviral switching to minimize resistance risk in HIV therapy" — PLoS ONE, 2011
-- "Controlling the Evolution of Resistance" — Journal of Process Control, 2011
+  return lines.join("\n").trim();
+}
 
-BEYOND WORK / PERSONAL INTERESTS:
-- Mentoring: Finds genuine satisfaction in mentoring — taking something complex and making it click for someone else.
-- Family & Hands-on Learning: Outside of meetings and models, enjoys robotics kits and STEM projects with his kids, which he considers as good a test of patience and creativity as any professional challenge.
-- Reading: Stays curious through reading across finance, AI, and how large systems break and recover.
-- Travel: Travels regularly and enjoys exploring new places.
-- Photography: Pursues photography as a hobby; sees it as a way to stay observant — a reminder that the most interesting things are usually hiding in plain sight.
-`.trim();
+const RESUME_CONTEXT = buildResumeContext(resume);
+
+// ─── system prompt ────────────────────────────────────────────────────────────
 
 const SYSTEM_PROMPT = `You are a resume-grounded assistant for Rutao Luo's personal website. Answer visitors' questions ONLY using the resume context below.
 
