@@ -141,7 +141,7 @@ export default function ChatWidget() {
               <Bot size={16} className="text-white" aria-hidden="true" />
             </div>
             <div>
-              <p className="text-sm font-semibold text-gray-900 dark:text-white">Resume Assistant</p>
+              <p className="text-sm font-semibold text-gray-900 dark:text-white">Virtual Rutao</p>
               <p className="text-xs text-gray-500 dark:text-gray-400">Ask about Rutao&apos;s background</p>
             </div>
             <button
