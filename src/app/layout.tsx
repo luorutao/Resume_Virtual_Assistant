@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Navbar from "@/components/Navbar";
 import ChatWidget from "@/components/ChatWidget";
+import Analytics from "@/components/Analytics";
 import "@/styles/globals.css";
 import resumeData from "@/data/resume.json";
 
@@ -76,6 +77,7 @@ export default function RootLayout({
             {children}
           </main>
           <ChatWidget />
+          <Analytics />
           <footer className="border-t border-gray-100 dark:border-gray-800 py-8 text-center text-sm text-gray-400 dark:text-gray-600">
             <p>
               © {new Date().getFullYear()} {personal.name}. Built with Next.js

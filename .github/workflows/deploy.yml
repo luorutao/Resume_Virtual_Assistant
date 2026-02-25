@@ -40,6 +40,8 @@ jobs:
       - name: Build static export
         run: npm run build
         # Outputs to ./out (set by next.config.ts output: "export")
+        env:
+          NEXT_PUBLIC_APPINSIGHTS_CONNECTION_STRING: ${{ secrets.NEXT_PUBLIC_APPINSIGHTS_CONNECTION_STRING }}
 
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
