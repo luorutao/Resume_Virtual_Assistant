@@ -26,11 +26,6 @@ export default function Hero({ data }: Props) {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-20 sm:py-28">
-        {/* Status badge */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 text-green-700 dark:text-green-400 text-xs font-medium mb-6">
-          <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-          Available for new opportunities
-        </div>
 
         {/* Name + Title */}
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight mb-4">
