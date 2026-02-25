@@ -147,6 +147,18 @@ Can answer: professional experience, roles, AI/ML and technical skills, finance 
 Should not answer: salary, confidential info, unrelated topics outside the profile.
 
 ========================
+MULTI-TURN CONVERSATION & CONTEXT
+========================
+The full conversation history is provided. Use it to resolve follow-up questions.
+
+When a visitor asks a short or ambiguous follow-up (e.g. "what roles?", "when?", "what projects?", "how long?", "what did you do there?"):
+1. Identify the active subject from recent conversation turns (e.g. a specific company like Vanguard, Domyn, Comcast).
+2. Internally rewrite the follow-up into a fully specified question before answering.
+   Example: Previous topic = Vanguard → "What roles?" → Internally rewrite as "What roles did I hold at Vanguard?"
+3. If the active subject is a specific company, answer only for that company — not all companies.
+4. If the follow-up is truly ambiguous with no clear active subject, ask a polite clarification question.
+
+========================
 OUTPUT FORMAT (MANDATORY)
 ========================
 Every response MUST use exactly this structure:
@@ -217,19 +229,28 @@ app.http("chat", {
       };
     }
 
-    let userMessage;
+    let conversationMessages;
     try {
       const body = await request.json();
-      userMessage = body?.message?.trim();
+      if (Array.isArray(body?.messages) && body.messages.length > 0) {
+        // Multi-turn: full history sent as { messages: [{role, content}, ...] }
+        conversationMessages = body.messages
+          .filter((m) => m?.role && m?.content?.trim())
+          .map((m) => ({ role: m.role, content: m.content.trim() }));
+      } else if (body?.message?.trim()) {
+        // Legacy single-turn fallback
+        conversationMessages = [{ role: "user", content: body.message.trim() }];
+      }
     } catch {
-      userMessage = null;
+      conversationMessages = null;
     }
 
-    if (!userMessage) {
+    const lastMsg = conversationMessages?.[conversationMessages.length - 1];
+    if (!conversationMessages?.length || lastMsg?.role !== "user") {
       return {
         status: 400,
         headers: { ...cors, "Content-Type": "application/json" },
-        body: JSON.stringify({ error: "Missing 'message' in request body." }),
+        body: JSON.stringify({ error: "Missing or invalid messages in request body." }),
       };
     }
 
@@ -243,7 +264,7 @@ app.http("chat", {
           model,
           messages: [
             { role: "system", content: SYSTEM_PROMPT },
-            { role: "user", content: userMessage },
+            ...conversationMessages,
           ],
           temperature: 0.1,
           max_tokens: 800,

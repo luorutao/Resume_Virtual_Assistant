@@ -45,10 +45,18 @@ export default function ChatWidget() {
         process.env.NODE_ENV === "development"
           ? "http://localhost:7071/api/chat"
           : "/api/chat";
+      // Send full conversation history (skip the static welcome message at index 0)
+      // so the model can resolve follow-up questions in context.
+      const history = messages.slice(1).map((m) => ({
+        role: m.role,
+        content: m.content,
+      }));
       const res = await fetch(apiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text }),
+        body: JSON.stringify({
+          messages: [...history, { role: "user", content: text }],
+        }),
       });
 
       const data = await res.json();
