@@ -28,6 +28,13 @@ variable "site_www_domain" {
   default     = "www.rutaojames.cv"
 }
 
+variable "deepseek_api_key" {
+  description = "DeepSeek API key for the chatbot Azure Function"
+  type        = string
+  sensitive   = true
+  default     = ""
+}
+
 variable "github_repo_url" {
   description = "Full HTTPS GitHub repo URL (e.g. https://github.com/rutaoluo/portfolio)"
   type        = string

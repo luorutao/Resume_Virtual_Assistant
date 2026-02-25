@@ -19,8 +19,12 @@ resource "azurerm_static_web_app" "portfolio" {
   name                = "${var.project_name}-${var.environment}"
   resource_group_name = azurerm_resource_group.portfolio.name
   location            = var.location
-  sku_tier            = "Free"   # Free supports 1 custom domain + 100 GB bandwidth
+  sku_tier            = "Free"   # Free supports 2 custom domains + 100 GB bandwidth
   sku_size            = "Free"
+
+  app_settings = var.deepseek_api_key != "" ? {
+    DEEPSEEK_API_KEY = var.deepseek_api_key
+  } : {}
 
   tags = {
     project     = var.project_name
