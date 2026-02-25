@@ -308,6 +308,12 @@
       "url": "https://www.sciencedirect.com/science/article/pii/S0959152410002283"
     }
   ],
+  "beyondWork": {
+    "paragraphs": [
+      "I find genuine satisfaction in mentoring — taking something complex and making it click for someone else. Outside of meetings and models, that often looks like a robotics kit on the kitchen table with my kids, which is as good a test of patience and creativity as any professional challenge.",
+      "I stay curious through reading — finance, AI, and the occasional deep dive into how large systems break and recover. Travel and photography round out the picture: both are good reminders that the most interesting things are usually hiding in plain sight."
+    ]
+  },
   "stats": [
     { "label": "Years in AI/ML", "value": "10+" },
     { "label": "Citations", "value": "~300" },

@@ -61,6 +61,10 @@ export interface Stat {
   value: string;
 }
 
+export interface BeyondWork {
+  paragraphs: string[];
+}
+
 export interface ResumeData {
   meta: { generatedAt: string; source: string };
   personal: PersonalInfo;
@@ -70,5 +74,6 @@ export interface ResumeData {
   education: EducationEntry[];
   certifications: Certification[];
   publications: Publication[];
+  beyondWork?: BeyondWork;
   stats?: Stat[];
 }
