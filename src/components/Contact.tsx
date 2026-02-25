@@ -1,4 +1,4 @@
-import { Mail, Linkedin, Github, Download, Phone } from "lucide-react";
+import { Mail, Linkedin, Download, Phone } from "lucide-react";
 import type { PersonalInfo } from "@/lib/types";
 
 interface Props {
@@ -60,19 +60,6 @@ export default function Contact({ personal }: Props) {
             </a>
           )}
 
-          {/* GitHub */}
-          {personal.github && (
-            <a
-              href={personal.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-secondary"
-              aria-label="View GitHub profile (opens in new tab)"
-            >
-              <Github size={16} aria-hidden="true" />
-              GitHub
-            </a>
-          )}
 
           {/* Download Resume */}
           <a

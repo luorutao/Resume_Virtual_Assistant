@@ -29,12 +29,6 @@ describe("Contact component", () => {
     expect(linkedinLink).toHaveAttribute("target", "_blank");
   });
 
-  it("renders GitHub link with target blank", () => {
-    const githubLink = screen.getByRole("link", { name: /github/i });
-    expect(githubLink).toHaveAttribute("href", personal.github);
-    expect(githubLink).toHaveAttribute("target", "_blank");
-  });
-
   it("renders Download Resume link", () => {
     const downloadLink = screen.getByRole("link", { name: /download resume/i });
     expect(downloadLink).toHaveAttribute("href", personal.resumePdf);

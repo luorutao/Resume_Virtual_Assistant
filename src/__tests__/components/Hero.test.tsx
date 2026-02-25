@@ -35,12 +35,6 @@ describe("Hero component", () => {
     expect(linkedinBtn).toHaveAttribute("target", "_blank");
   });
 
-  it("renders the GitHub button", () => {
-    const githubBtn = screen.getByRole("link", { name: /view github profile/i });
-    expect(githubBtn).toHaveAttribute("href", data.personal.github);
-    expect(githubBtn).toHaveAttribute("target", "_blank");
-  });
-
   it("renders stats", () => {
     if (data.stats && data.stats.length > 0) {
       data.stats.forEach((stat) => {

@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, Github, Linkedin, Download, ChevronDown } from "lucide-react";
+import { Mail, Linkedin, Download, ChevronDown } from "lucide-react";
 import type { ResumeData } from "@/lib/types";
 
 interface Props {
@@ -66,18 +66,6 @@ export default function Hero({ data }: Props) {
             </a>
           )}
 
-          {personal.github && (
-            <a
-              href={personal.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-secondary"
-              aria-label="View GitHub profile (opens in new tab)"
-            >
-              <Github size={16} aria-hidden="true" />
-              GitHub
-            </a>
-          )}
 
           <a
             href={personal.resumePdf}
