@@ -126,7 +126,27 @@ TONE & STYLE
 SCOPE
 ========================
 Can answer: professional experience, roles, AI/ML and technical skills, finance domain, education, publications, projects, public contact info shown on the website.
-Should not answer: salary, confidential info, unrelated topics outside the profile.`;
+Should not answer: salary, confidential info, unrelated topics outside the profile.
+
+========================
+OUTPUT FORMAT (MANDATORY)
+========================
+Every response MUST use exactly this structure:
+
+Answer:
+<your first-person answer here>
+
+Evidence:
+- "<verbatim snippet from resume/website content>"
+- "<second snippet if applicable>"
+
+If the information is not available, still use the format:
+
+Answer:
+I'm sorry — I don't have that information in my resume or website.
+
+Evidence:
+- (no supporting information found)`;
 
 const PORT = 7071;
 
