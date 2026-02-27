@@ -22,9 +22,10 @@ resource "azurerm_static_web_app" "portfolio" {
   sku_tier            = "Free"   # Free supports 2 custom domains + 100 GB bandwidth
   sku_size            = "Free"
 
-  app_settings = var.deepseek_api_key != "" ? {
-    DEEPSEEK_API_KEY = var.deepseek_api_key
-  } : {}
+  app_settings = merge(
+    var.deepseek_api_key != "" ? { DEEPSEEK_API_KEY = var.deepseek_api_key } : {},
+    var.appinsights_connection_string != "" ? { APPLICATIONINSIGHTS_CONNECTION_STRING = var.appinsights_connection_string } : {}
+  )
 
   tags = {
     project     = var.project_name

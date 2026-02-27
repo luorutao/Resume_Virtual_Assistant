@@ -21,6 +21,7 @@ export default function ChatWidget() {
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const sessionId = useRef(Math.random().toString(36).slice(2, 10));
 
   useEffect(() => {
     if (open) {
@@ -56,6 +57,7 @@ export default function ChatWidget() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           messages: [...history, { role: "user", content: text }],
+          sessionId: sessionId.current,
         }),
       });
 

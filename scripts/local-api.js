@@ -201,6 +201,10 @@ const server = http.createServer(async (req, res) => {
     }
 
     const parsed = (() => { try { return JSON.parse(body); } catch { return {}; } })();
+    const sessionId = parsed?.sessionId ?? "unknown";
+    const ip = req.headers["x-forwarded-for"]?.split(",")[0].trim()
+             || req.socket.remoteAddress
+             || "unknown";
     let conversationMessages;
     if (Array.isArray(parsed?.messages) && parsed.messages.length > 0) {
       // Multi-turn: full history sent as { messages: [{role, content}, ...] }
@@ -229,6 +233,8 @@ const server = http.createServer(async (req, res) => {
     const data = JSON.parse(resp.body);
     const reply = data.choices?.[0]?.message?.content ?? "No response.";
     console.log("[chat]", JSON.stringify({
+      sessionId,
+      ip,
       turn: conversationMessages.length,
       question: lastMsg.content,
       reply,
