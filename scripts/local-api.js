@@ -228,6 +228,11 @@ const server = http.createServer(async (req, res) => {
     );
     const data = JSON.parse(resp.body);
     const reply = data.choices?.[0]?.message?.content ?? "No response.";
+    console.log("[chat]", JSON.stringify({
+      turn: conversationMessages.length,
+      question: lastMsg.content,
+      reply,
+    }));
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify({ reply }));
   });
