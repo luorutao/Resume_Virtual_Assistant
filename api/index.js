@@ -278,6 +278,12 @@ app.http("chat", {
       const data = JSON.parse(response.body);
       const reply = data.choices?.[0]?.message?.content ?? "No response from model.";
 
+      context.log("[chat]", JSON.stringify({
+        turn: conversationMessages.length,
+        question: lastMsg.content,
+        reply,
+      }));
+
       return {
         status: 200,
         headers: { ...cors, "Content-Type": "application/json" },
