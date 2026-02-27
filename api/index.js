@@ -230,8 +230,10 @@ app.http("chat", {
     }
 
     let conversationMessages;
+    let sessionId = "unknown";
     try {
       const body = await request.json();
+      sessionId = body?.sessionId ?? "unknown";
       if (Array.isArray(body?.messages) && body.messages.length > 0) {
         // Multi-turn: full history sent as { messages: [{role, content}, ...] }
         conversationMessages = body.messages
@@ -244,6 +246,10 @@ app.http("chat", {
     } catch {
       conversationMessages = null;
     }
+
+    const ip = request.headers.get("x-forwarded-for")?.split(",")[0].trim()
+             || request.headers.get("x-client-ip")
+             || "unknown";
 
     const lastMsg = conversationMessages?.[conversationMessages.length - 1];
     if (!conversationMessages?.length || lastMsg?.role !== "user") {
@@ -279,6 +285,8 @@ app.http("chat", {
       const reply = data.choices?.[0]?.message?.content ?? "No response from model.";
 
       context.log("[chat]", JSON.stringify({
+        sessionId,
+        ip,
         turn: conversationMessages.length,
         question: lastMsg.content,
         reply,

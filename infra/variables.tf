@@ -35,6 +35,13 @@ variable "deepseek_api_key" {
   default     = ""
 }
 
+variable "appinsights_connection_string" {
+  description = "Application Insights connection string for server-side Function logging"
+  type        = string
+  sensitive   = true
+  default     = ""
+}
+
 variable "github_repo_url" {
   description = "Full HTTPS GitHub repo URL (e.g. https://github.com/rutaoluo/portfolio)"
   type        = string
