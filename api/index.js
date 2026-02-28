@@ -12,6 +12,14 @@
 
 const { app } = require("@azure/functions");
 const https = require("https");
+const appInsights = require("applicationinsights");
+
+// ─── initialise App Insights once at cold-start ───────────────────────────────
+if (process.env.APPLICATIONINSIGHTS_CONNECTION_STRING) {
+  appInsights.setup(process.env.APPLICATIONINSIGHTS_CONNECTION_STRING)
+    .setAutoCollectConsole(false)
+    .start();
+}
 
 // ─── load resume data ─────────────────────────────────────────────────────────
 
@@ -284,13 +292,18 @@ app.http("chat", {
       const data = JSON.parse(response.body);
       const reply = data.choices?.[0]?.message?.content ?? "No response from model.";
 
-      context.log("[chat]", JSON.stringify({
-        sessionId,
-        ip,
-        turn: conversationMessages.length,
-        question: lastMsg.content,
-        reply,
-      }));
+      if (appInsights.defaultClient) {
+        appInsights.defaultClient.trackTrace({
+          message: "[chat]" + JSON.stringify({
+            sessionId,
+            ip,
+            turn: conversationMessages.length,
+            question: lastMsg.content,
+            reply,
+          }),
+        });
+        appInsights.defaultClient.flush();
+      }
 
       return {
         status: 200,
