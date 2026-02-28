@@ -24,7 +24,7 @@ jest.mock("applicationinsights", () => ({
   setAutoCollectConsole: jest.fn().mockReturnThis(),
   start: jest.fn(),
   defaultClient: { trackTrace: jest.fn(), flush: jest.fn() },
-}));
+}), { virtual: true });
 
 const https = require("https");
 
