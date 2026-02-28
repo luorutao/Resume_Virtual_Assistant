@@ -19,6 +19,13 @@ jest.mock("https", () => ({
   request: jest.fn(),
 }));
 
+jest.mock("applicationinsights", () => ({
+  setup: jest.fn().mockReturnThis(),
+  setAutoCollectConsole: jest.fn().mockReturnThis(),
+  start: jest.fn(),
+  defaultClient: { trackTrace: jest.fn(), flush: jest.fn() },
+}));
+
 const https = require("https");
 
 // Sets up https.request to simulate a successful/failed DeepSeek response.
@@ -43,6 +50,7 @@ function makeRequest(method = "POST", jsonBody = null) {
   return {
     method,
     json: jest.fn().mockResolvedValue(jsonBody),
+    headers: { get: jest.fn().mockReturnValue(null) },
   };
 }
 
@@ -77,7 +85,7 @@ describe("Azure Function /api/chat", () => {
   });
 
   it("returns 400 when body is not JSON", async () => {
-    const req = { method: "POST", json: jest.fn().mockRejectedValue(new SyntaxError("bad json")) };
+    const req = { method: "POST", json: jest.fn().mockRejectedValue(new SyntaxError("bad json")), headers: { get: jest.fn().mockReturnValue(null) } };
     const result = await registeredHandler(req, fakeContext);
     expect(result.status).toBe(400);
   });
