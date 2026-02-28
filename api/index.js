@@ -294,7 +294,7 @@ app.http("chat", {
 
       if (appInsights.defaultClient) {
         appInsights.defaultClient.trackTrace({
-          message: "[chat]" + JSON.stringify({
+          message: "[chat] " + JSON.stringify({
             sessionId,
             ip,
             turn: conversationMessages.length,
