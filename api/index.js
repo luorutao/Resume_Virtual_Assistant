@@ -12,14 +12,16 @@
 
 const { app } = require("@azure/functions");
 const https = require("https");
-const appInsights = require("applicationinsights");
 
-// ─── initialise App Insights once at cold-start ───────────────────────────────
-if (process.env.APPLICATIONINSIGHTS_CONNECTION_STRING) {
-  appInsights.setup(process.env.APPLICATIONINSIGHTS_CONNECTION_STRING)
-    .setAutoCollectConsole(false)
-    .start();
+// ─── parse App Insights ingestion endpoint + key from connection string ────────
+function parseAppInsights(connStr) {
+  if (!connStr) return null;
+  const key = (connStr.match(/InstrumentationKey=([^;]+)/i) || [])[1];
+  const endpoint = (connStr.match(/IngestionEndpoint=([^;]+)/i) || [])[1];
+  if (!key || !endpoint) return null;
+  return { key, url: endpoint.replace(/\/$/, "") + "/v2/track" };
 }
+const AI = parseAppInsights(process.env.APPLICATIONINSIGHTS_CONNECTION_STRING);
 
 // ─── load resume data ─────────────────────────────────────────────────────────
 
@@ -292,17 +294,28 @@ app.http("chat", {
       const data = JSON.parse(response.body);
       const reply = data.choices?.[0]?.message?.content ?? "No response from model.";
 
-      if (appInsights.defaultClient) {
-        appInsights.defaultClient.trackTrace({
-          message: "[chat] " + JSON.stringify({
-            sessionId,
-            ip,
-            turn: conversationMessages.length,
-            question: lastMsg.content,
-            reply,
-          }),
-        });
-        await appInsights.defaultClient.flush();
+      if (AI) {
+        await httpsPost(AI.url,
+          { "Content-Type": "application/json", "x-api-key": AI.key },
+          [{
+            name: "Microsoft.ApplicationInsights.Message",
+            time: new Date().toISOString(),
+            iKey: AI.key,
+            data: {
+              baseType: "MessageData",
+              baseData: {
+                ver: 2,
+                message: "[chat] " + JSON.stringify({
+                  sessionId, ip,
+                  turn: conversationMessages.length,
+                  question: lastMsg.content,
+                  reply,
+                }),
+                severityLevel: 1,
+              },
+            },
+          }]
+        );
       }
 
       return {
