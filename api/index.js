@@ -302,7 +302,7 @@ app.http("chat", {
             reply,
           }),
         });
-        appInsights.defaultClient.flush();
+        await appInsights.defaultClient.flush();
       }
 
       return {
