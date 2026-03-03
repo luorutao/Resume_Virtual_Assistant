@@ -27,45 +27,70 @@ if (fs.existsSync(envPath)) {
     });
 }
 
-// ─── parse ApplicationId from connection string ───────────────────────────────
+// ─── parse InstrumentationKey → look up Log Analytics workspace ID ───────────
 
 const connStr = process.env.NEXT_PUBLIC_APPINSIGHTS_CONNECTION_STRING || "";
-const appIdMatch = connStr.match(/ApplicationId=([^;]+)/i);
-if (!appIdMatch) {
-  console.error("[log-viewer] ERROR: Could not find ApplicationId in NEXT_PUBLIC_APPINSIGHTS_CONNECTION_STRING");
+const iKeyMatch = connStr.match(/InstrumentationKey=([^;]+)/i);
+if (!iKeyMatch) {
+  console.error("[log-viewer] ERROR: Could not find InstrumentationKey in NEXT_PUBLIC_APPINSIGHTS_CONNECTION_STRING");
   console.error("[log-viewer] Make sure .env.local is present and contains the connection string.");
   process.exit(1);
 }
-const APP_ID = appIdMatch[1].trim();
-console.log(`[log-viewer] Using ApplicationId: ${APP_ID}`);
 
-// ─── query App Insights ───────────────────────────────────────────────────────
+// Resolve the Log Analytics workspace ID from the App Insights resource.
+// For workspace-based App Insights, az monitor app-insights query is unreliable;
+// querying the workspace directly (AppTraces table) is always consistent.
+let WORKSPACE_ID;
+try {
+  const raw = execSync(
+    `az resource list --resource-type "microsoft.insights/components" --query "[0].id" -o tsv`,
+    { encoding: "utf-8", timeout: 15000 }
+  ).trim();
+  const wsRaw = execSync(
+    `az monitor app-insights component show --ids "${raw}" --query "workspaceResourceId" -o tsv`,
+    { encoding: "utf-8", timeout: 15000 }
+  ).trim();
+  // Extract workspace GUID (customerId) from the resource ID
+  const wsName = wsRaw.split("/").pop();
+  const wsRg   = wsRaw.split("/resourceGroups/")[1].split("/")[0];
+  WORKSPACE_ID = execSync(
+    `az monitor log-analytics workspace show --workspace-name "${wsName}" --resource-group "${wsRg}" --query "customerId" -o tsv`,
+    { encoding: "utf-8", timeout: 15000 }
+  ).trim();
+  console.log(`[log-viewer] Using Log Analytics workspace: ${WORKSPACE_ID}`);
+} catch (err) {
+  console.error("[log-viewer] ERROR: Could not resolve Log Analytics workspace ID:", err.message);
+  process.exit(1);
+}
+
+// ─── query Log Analytics workspace directly ───────────────────────────────────
 
 function queryAppInsights(days) {
+  // AppTraces is the workspace table; columns are PascalCase (Message, not message)
   const query = [
-    "traces",
-    `| where timestamp > ago(${days}d)`,
-    "| where message startswith '[chat]'",
-    "| extend d=parse_json(substring(message,7))",
-    "| project timestamp, sessionId=tostring(d.sessionId), ip=tostring(d.ip), turn=toint(d.turn), question=tostring(d.question), reply=tostring(d.reply)",
+    "AppTraces",
+    `| where TimeGenerated > ago(${days}d)`,
+    "| where Message startswith '[chat]'",
+    "| extend d=parse_json(substring(Message,7))",
+    "| project timestamp=TimeGenerated, sessionId=tostring(d.sessionId), ip=tostring(d.ip), turn=toint(d.turn), question=tostring(d.question), reply=tostring(d.reply)",
     "| order by timestamp asc",
   ].join(" ");
 
-  const cmd = `az monitor app-insights query --app "${APP_ID}" --analytics-query "${query.replace(/"/g, '\\"')}"`;
+  const cmd = `az monitor log-analytics query --workspace "${WORKSPACE_ID}" --analytics-query "${query.replace(/"/g, '\\"')}"`;
 
   try {
     const raw = execSync(cmd, { encoding: "utf-8", timeout: 30000 });
-    const result = JSON.parse(raw);
-    // Result shape: { tables: [{ columns: [...], rows: [[...], ...] }] }
-    const table = result?.tables?.[0];
-    if (!table) return [];
-
-    const cols = table.columns.map((c) => c.name);
-    return table.rows.map((row) => {
-      const obj = {};
-      cols.forEach((col, i) => { obj[col] = row[i]; });
-      return obj;
-    });
+    const rows = JSON.parse(raw);
+    // log-analytics query returns an array of objects directly
+    if (!Array.isArray(rows)) return [];
+    return rows.map((r) => ({
+      timestamp: r.timestamp,
+      sessionId: r.sessionId,
+      ip:        r.ip,
+      turn:      r.turn,
+      question:  r.question,
+      reply:     r.reply,
+    }));
   } catch (err) {
     throw new Error(`az query failed: ${err.message}`);
   }
