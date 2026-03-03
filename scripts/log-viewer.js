@@ -311,5 +311,5 @@ const server = http.createServer((req, res) => {
 
 server.listen(PORT, () => {
   console.log(`[log-viewer] Running at http://localhost:${PORT}`);
-  console.log(`[log-viewer] ApplicationId: ${APP_ID}`);
+  console.log(`[log-viewer] Workspace: ${WORKSPACE_ID}`);
 });
