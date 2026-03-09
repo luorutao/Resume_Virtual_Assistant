@@ -61,6 +61,15 @@ export interface Stat {
   value: string;
 }
 
+export interface ScholarMetrics {
+  citations: number;
+  citationsSince2021: number;
+  hIndex: number;
+  hIndexSince2021: number;
+  i10Index: number;
+  i10IndexSince2021: number;
+}
+
 export interface BeyondWork {
   paragraphs: string[];
 }
@@ -74,6 +83,7 @@ export interface ResumeData {
   education: EducationEntry[];
   certifications: Certification[];
   publications: Publication[];
+  scholarMetrics?: ScholarMetrics;
   beyondWork?: BeyondWork;
   stats?: Stat[];
 }

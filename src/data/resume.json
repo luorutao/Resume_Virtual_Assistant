@@ -190,6 +190,14 @@
       "icon": ""
     }
   ],
+  "scholarMetrics": {
+    "citations": 311,
+    "citationsSince2021": 64,
+    "hIndex": 9,
+    "hIndexSince2021": 5,
+    "i10Index": 8,
+    "i10IndexSince2021": 2
+  },
   "beyondWork": {
     "paragraphs": [
       "I find genuine satisfaction in mentoring — taking something complex and making it click for someone else. Outside of meetings and models, that often looks like a robotics kit on the kitchen table with my kids, which is as good a test of patience and creativity as any professional challenge.",
