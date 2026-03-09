@@ -190,6 +190,11 @@
       "icon": ""
     }
   ],
+  "about": [
+    "I am an AI and data leader with 10+ years of experience building modern investment data, analytics, and decisioning platforms in financial services. My work spans asset management at Vanguard and regulated enterprise AI at Domyn, where I have led initiatives across fixed income analytics, investment operations, cloud modernization, semantic data architecture, and LLM-powered systems.",
+    "I specialize in connecting business strategy with scalable technical execution — translating complex investment and data challenges into governed platforms, AI-ready architectures, and high-impact products. My experience includes modernizing legacy analytics environments, integrating structured and unstructured data, building semantic and metadata frameworks, and delivering AI/ML solutions such as agentic systems, Text-to-SQL, and personalization capabilities.",
+    "With more than 9 years at Vanguard, I bring deep knowledge of investment data, governance, and investor-focused use cases, along with a proven ability to align senior stakeholders, mentor teams, and drive practical innovation in highly regulated environments. In addition to my industry work, I have authored over a dozen research papers with more than 300 citations, reflecting a strong foundation in analytical rigor, innovation, and applied problem solving."
+  ],
   "scholarMetrics": {
     "citations": 311,
     "citationsSince2021": 64,

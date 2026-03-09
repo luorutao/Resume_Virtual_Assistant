@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import About from "@/components/About";
 import Experience from "@/components/Experience";
 import Skills from "@/components/Skills";
 import Education from "@/components/Education";
@@ -14,6 +15,7 @@ export default function Home() {
   return (
     <>
       <Hero data={data} />
+      {data.about && <About paragraphs={data.about} />}
       <Experience experience={data.experience} />
       <Skills skills={data.skills} />
       <Education
