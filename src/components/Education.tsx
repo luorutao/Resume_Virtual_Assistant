@@ -55,11 +55,6 @@ export default function Education({ education, certifications }: Props) {
                       {edu.location}
                     </p>
                   )}
-                  {edu.year && (
-                    <p className="text-xs text-blue-600 dark:text-blue-400 mt-1.5 font-medium">
-                      {edu.year}
-                    </p>
-                  )}
                 </div>
               ))}
             </div>

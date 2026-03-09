@@ -199,13 +199,94 @@
   "publications": [
     {
       "title": "Spatial modeling of HIV cryptic viremia and 2-LTR formation during raltegravir intensification",
+      "authors": "E. Fabian Cardozo, Rutao Luo, Michael J. Piovoso and Ryan Zurakowski",
+      "journal": "Journal of Theoretical Biology, Vol. 345, pp. 61-69",
       "year": 2014,
       "url": "https://www.sciencedirect.com/science/article/pii/S0022519313005717"
     },
     {
       "title": "Modelling HIV-1 2-LTR dynamics following raltegravir intensification",
+      "authors": "Rutao Luo, E. Fabian Cardozo, Michael J. Piovoso, Hulin Wu, Maria J. Buzon, Javier Martinez-Picado and Ryan Zurakowski",
+      "journal": "Journal of the Royal Society – Interface, Vol. 10, No. 84, pp. 20131086",
       "year": 2013,
       "url": "https://rsif.royalsocietypublishing.org/content/10/84/20130186.full.pdf+html"
+    },
+    {
+      "title": "Modeling Uncertainty in Single-Copy Assays for HIV",
+      "authors": "Rutao Luo, Michael J. Piovoso and Ryan Zurakowski",
+      "journal": "Journal of Clinical Microbiology, 50(10):3382-3383",
+      "year": 2012,
+      "url": "https://jcm.asm.org/content/50/10/3381.full"
+    },
+    {
+      "title": "HIV Model Parameter Estimates from Interruption Trial Data Including Drug Efficacy and Reservoir Dynamics",
+      "authors": "Rutao Luo, Michael J. Piovoso, Javier Martinez-Picado and Ryan Zurakowski",
+      "journal": "PLoS ONE 7(7): e40198",
+      "year": 2012,
+      "url": "https://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0040198"
+    },
+    {
+      "title": "Optimal antiviral switching to minimize resistance risk in HIV therapy",
+      "authors": "Rutao Luo, Michael J. Piovoso, Javier Martinez-Picado and Ryan Zurakowski",
+      "journal": "PLoS ONE 6(11): e27047",
+      "year": 2011,
+      "url": "https://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0027047"
+    },
+    {
+      "title": "Controlling the Evolution of Resistance",
+      "authors": "Rutao Luo, LaMont Cannon, Jason Hernandez, Michael J. Piovoso and Ryan Zurakowski",
+      "journal": "Journal of Process Control, Vol. 21, No. 3, pp. 367-378",
+      "year": 2011,
+      "url": "https://www.sciencedirect.com/science/article/pii/S0959152410002283"
+    },
+    {
+      "title": "Quantitative analysis of viral persistence and transient viral load rebound from HIV clinical data",
+      "authors": "Rutao Luo, Michael J. Piovoso and Ryan Zurakowski",
+      "journal": "33rd International Conference of the IEEE EMBS, pp. 3585-3588",
+      "year": 2011,
+      "url": "https://ieeexplore.ieee.org/document/6090599"
+    },
+    {
+      "title": "Modeling-error robustness of a viral-load preconditioning strategy for HIV treatment switching",
+      "authors": "Rutao Luo, Michael J. Piovoso and Ryan Zurakowski",
+      "journal": "Proc. American Control Conference, Baltimore, MD, pp. 5155-5160",
+      "year": 2010,
+      "url": "https://ieeexplore.ieee.org/document/5530483"
+    },
+    {
+      "title": "A Generalized Multi-strain Model of HIV Evolution with Implications for Drug-resistance Management",
+      "authors": "Rutao Luo, Michael Piovoso and Ryan Zurakowski",
+      "journal": "Proc. American Control Conference, St. Louis MO, pp. 2295-2300",
+      "year": 2009,
+      "url": "https://ieeexplore.ieee.org/document/5160358"
+    },
+    {
+      "title": "Resistance risk management in HIV therapy switching with explicit quiescent T-cell modeling",
+      "authors": "Ryan Zurakowski and Rutao Luo",
+      "journal": "Proc. 17th IFAC World Congress, Seoul, Korea, pp. 10325-10330",
+      "year": 2008,
+      "url": "https://www.ifac-papersonline.net/Detailed/37440.html"
+    },
+    {
+      "title": "A new strategy to decrease risk of resistance emerging during therapy switching in HIV treatment",
+      "authors": "Rutao Luo and Ryan Zurakowski",
+      "journal": "Proc. American Control Conference, Seattle, WA, pp. 2112-2117",
+      "year": 2008,
+      "url": "https://ieeexplore.ieee.org/document/4586804"
+    },
+    {
+      "title": "An adaptive feedback neural network approach to job-shop scheduling problem",
+      "authors": "W. Zhang and R. Luo",
+      "journal": "Proc. IEEE IJCNN, pp. 3949-3954",
+      "year": 2008,
+      "url": "https://ieeexplore.ieee.org/document/4634365"
+    },
+    {
+      "title": "Lesion detection using Gabor-based saliency field mapping",
+      "authors": "Marc Macenko, Rutao Luo, Mehmet Celenk, Limin Ma and Qiang Zhou",
+      "journal": "Proc. SPIE, Vol. 6512, 65123E",
+      "year": 2007,
+      "url": "https://proceedings.spiedigitallibrary.org/proceeding.aspx?articleid=1299644"
     }
   ]
 }
