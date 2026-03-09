@@ -20,7 +20,7 @@ export default function Home() {
         education={data.education}
         certifications={data.certifications}
       />
-      <Publications publications={data.publications} />
+      <Publications publications={data.publications} scholarMetrics={data.scholarMetrics} />
       {data.beyondWork && <BeyondWork beyondWork={data.beyondWork} />}
       <Contact personal={data.personal} />
     </>

@@ -1,11 +1,12 @@
 import { BookOpen, ExternalLink } from "lucide-react";
-import type { Publication } from "@/lib/types";
+import type { Publication, ScholarMetrics } from "@/lib/types";
 
 interface Props {
   publications: Publication[];
+  scholarMetrics?: ScholarMetrics;
 }
 
-export default function Publications({ publications }: Props) {
+export default function Publications({ publications, scholarMetrics }: Props) {
   if (!publications || publications.length === 0) return null;
 
   return (
@@ -19,9 +20,25 @@ export default function Publications({ publications }: Props) {
         <h2 id="publications-heading" className="section-heading mb-2">
           Selected Publications
         </h2>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-10">
-          ~300 citations across peer-reviewed journals and conference papers.
-        </p>
+        {scholarMetrics ? (
+          <div className="flex flex-wrap gap-6 mb-10">
+            {[
+              { label: "Citations", all: scholarMetrics.citations, recent: scholarMetrics.citationsSince2021 },
+              { label: "h-index", all: scholarMetrics.hIndex, recent: scholarMetrics.hIndexSince2021 },
+              { label: "i10-index", all: scholarMetrics.i10Index, recent: scholarMetrics.i10IndexSince2021 },
+            ].map(({ label, all, recent }) => (
+              <div key={label} className="flex flex-col">
+                <span className="text-2xl font-bold text-gray-900 dark:text-white">{all}</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">{label}</span>
+                <span className="text-xs text-blue-600 dark:text-blue-400">{recent} since 2021</span>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-10">
+            ~300 citations across peer-reviewed journals and conference papers.
+          </p>
+        )}
 
         <div className="flex flex-col gap-4">
           {publications.map((pub, i) => (
