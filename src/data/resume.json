@@ -144,24 +144,28 @@
     },
     {
       "category": "Big Data & Cloud",
-      "items": ["AWS (Certified ML Specialty)", "Spark", "Hadoop", "MapReduce"]
+      "items": ["AWS", "Spark", "Hadoop", "MapReduce"]
+    },
+    {
+      "category": "Programming Languages",
+      "items": ["Python", "R", "SQL", "MATLAB", "SAS"]
     }
   ],
   "education": [
     {
       "degree": "Master of Science in Electrical Engineering",
       "school": "University of Delaware",
-      "year": ""
+      "year": "2013"
     },
     {
       "degree": "Master of Science in Applied Mathematics",
       "school": "University of Delaware",
-      "year": ""
+      "year": "2013"
     },
     {
       "degree": "Bachelor of Science in Control Engineering",
       "school": "Beijing University of Chemical Technology",
-      "year": ""
+      "year": "2006"
     }
   ],
   "certifications": [
@@ -186,16 +190,22 @@
       "icon": ""
     }
   ],
+  "beyondWork": {
+    "paragraphs": [
+      "I find genuine satisfaction in mentoring — taking something complex and making it click for someone else. Outside of meetings and models, that often looks like a robotics kit on the kitchen table with my kids, which is as good a test of patience and creativity as any professional challenge.",
+      "I stay curious through reading — finance, AI, and the occasional deep dive into how large systems break and recover. Travel and photography round out the picture: both are good reminders that the most interesting things are usually hiding in plain sight."
+    ]
+  },
   "publications": [
     {
       "title": "Spatial modeling of HIV cryptic viremia and 2-LTR formation during raltegravir intensification",
       "year": 2014,
-      "url": "http://www.sciencedirect.com/science/article/pii/S0022519313005717"
+      "url": "https://www.sciencedirect.com/science/article/pii/S0022519313005717"
     },
     {
       "title": "Modelling HIV-1 2-LTR dynamics following raltegravir intensification",
       "year": 2013,
-      "url": "http://rsif.royalsocietypublishing.org/content/10/84/20130186.full.pdf+html"
+      "url": "https://rsif.royalsocietypublishing.org/content/10/84/20130186.full.pdf+html"
     }
   ]
 }
