@@ -82,6 +82,7 @@ export interface ResumeData {
   skills: SkillGroup[];
   education: EducationEntry[];
   certifications: Certification[];
+  about?: string[];
   publications: Publication[];
   scholarMetrics?: ScholarMetrics;
   beyondWork?: BeyondWork;
