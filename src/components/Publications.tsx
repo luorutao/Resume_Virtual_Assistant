@@ -1,4 +1,4 @@
-import { BookOpen, ExternalLink } from "lucide-react";
+import { BookOpen, ExternalLink, Quote, TrendingUp, BarChart2 } from "lucide-react";
 import type { Publication, ScholarMetrics } from "@/lib/types";
 
 interface Props {
@@ -21,16 +21,46 @@ export default function Publications({ publications, scholarMetrics }: Props) {
           Selected Publications
         </h2>
         {scholarMetrics ? (
-          <div className="flex flex-wrap gap-6 mb-10">
+          <div className="grid grid-cols-3 gap-4 mb-10">
             {[
-              { label: "Citations", all: scholarMetrics.citations, recent: scholarMetrics.citationsSince2021 },
-              { label: "h-index", all: scholarMetrics.hIndex, recent: scholarMetrics.hIndexSince2021 },
-              { label: "i10-index", all: scholarMetrics.i10Index, recent: scholarMetrics.i10IndexSince2021 },
-            ].map(({ label, all, recent }) => (
-              <div key={label} className="flex flex-col">
-                <span className="text-2xl font-bold text-gray-900 dark:text-white">{all}</span>
-                <span className="text-xs text-gray-500 dark:text-gray-400">{label}</span>
-                <span className="text-xs text-blue-600 dark:text-blue-400">{recent} since 2021</span>
+              {
+                label: "Citations",
+                all: scholarMetrics.citations,
+                recent: scholarMetrics.citationsSince2021,
+                icon: Quote,
+                iconColor: "text-blue-500",
+                iconBg: "bg-blue-50 dark:bg-blue-900/30",
+              },
+              {
+                label: "h-index",
+                all: scholarMetrics.hIndex,
+                recent: scholarMetrics.hIndexSince2021,
+                icon: TrendingUp,
+                iconColor: "text-purple-500",
+                iconBg: "bg-purple-50 dark:bg-purple-900/30",
+              },
+              {
+                label: "i10-index",
+                all: scholarMetrics.i10Index,
+                recent: scholarMetrics.i10IndexSince2021,
+                icon: BarChart2,
+                iconColor: "text-amber-500",
+                iconBg: "bg-amber-50 dark:bg-amber-900/30",
+              },
+            ].map(({ label, all, recent, icon: Icon, iconColor, iconBg }) => (
+              <div key={label} className="card text-center p-5">
+                <div
+                  className={`w-10 h-10 rounded-xl ${iconBg} flex items-center justify-center mx-auto mb-3`}
+                >
+                  <Icon className={`w-5 h-5 ${iconColor}`} aria-hidden="true" />
+                </div>
+                <div className="text-3xl font-bold text-gray-900 dark:text-white">{all}</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide mt-0.5">
+                  {label}
+                </div>
+                <div className="text-xs text-blue-600 dark:text-blue-400 mt-1">
+                  {recent} since 2021
+                </div>
               </div>
             ))}
           </div>
@@ -44,7 +74,8 @@ export default function Publications({ publications, scholarMetrics }: Props) {
           {publications.map((pub, i) => (
             <div
               key={i}
-              className="card flex items-start gap-4 hover:border-blue-100 dark:hover:border-blue-900 transition-colors"
+              className="card flex items-start gap-4 hover:border-blue-100 dark:hover:border-blue-900 transition-colors animate-fade-in"
+              style={{ animationDelay: `${i * 40}ms`, animationFillMode: "both" }}
             >
               <div className="shrink-0 mt-0.5">
                 <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center">

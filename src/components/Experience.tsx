@@ -8,18 +8,39 @@ interface Props {
   experience: ExperienceEntry[];
 }
 
-function ExperienceCard({ job, defaultOpen }: { job: ExperienceEntry; defaultOpen: boolean }) {
+const ACCENT_COLORS = [
+  "border-l-blue-500",
+  "border-l-indigo-400",
+  "border-l-violet-400",
+  "border-l-slate-400",
+  "border-l-slate-300",
+  "border-l-slate-300",
+];
+
+function ExperienceCard({
+  job,
+  defaultOpen,
+  index,
+}: {
+  job: ExperienceEntry;
+  defaultOpen: boolean;
+  index: number;
+}) {
   const [expanded, setExpanded] = useState(defaultOpen);
+  const accentColor = ACCENT_COLORS[index] ?? "border-l-slate-300";
 
   return (
-    <div className="relative pl-8">
+    <div
+      className="relative pl-8 animate-slide-up"
+      style={{ animationDelay: `${index * 100}ms`, animationFillMode: "both" }}
+    >
       {/* Timeline dot */}
       <div
         className="absolute left-0 top-1.5 w-4 h-4 rounded-full border-2 border-blue-500 bg-white dark:bg-gray-950 shadow"
         aria-hidden="true"
       />
 
-      <div className="card mb-0">
+      <div className={`card mb-0 border-l-4 ${accentColor}`}>
         {/* Header row */}
         <button
           onClick={() => setExpanded((v) => !v)}
@@ -145,7 +166,7 @@ export default function Experience({ experience }: Props) {
 
           <div className="flex flex-col gap-6">
             {experience.map((job, i) => (
-              <ExperienceCard key={job.id} job={job} defaultOpen={i === 0} />
+              <ExperienceCard key={job.id} job={job} defaultOpen={i === 0} index={i} />
             ))}
           </div>
         </div>

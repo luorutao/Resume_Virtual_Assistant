@@ -11,6 +11,7 @@
     --card: 249 250 251;
     --border: 229 231 235;
     --brand: 37 99 235;
+    --section-alt: 239 246 255;
   }
 
   .dark {
@@ -19,6 +20,7 @@
     --card: 17 24 39;
     --border: 55 65 81;
     --brand: 96 165 250;
+    --section-alt: 15 23 42;
   }
 
   html {
